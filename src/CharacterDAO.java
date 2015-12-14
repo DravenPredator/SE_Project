@@ -62,7 +62,11 @@ public class CharacterDAO {
             conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 
             stmt = conn.createStatement();
-            sql = "INSERT INTO CHARACTER (RACE_ID, CLASS_ID, INVENTORY_ID, SPELL_BOOK_ID, ABILITY_SCORE_ID, CHAR_NAME, PLAYER_NAME, CHAR_LVL) OUTPUT inserted.ID  VALUES (" + character.getRaceID() + ", " + character.getClassID() + ", " + character.getInvetoryID() + ", " + character.getSpellBookID() + ", " + character.getAbilityScoreID() + ", " + character.getCName() + ", " + character.getPName() + ", " + character.getLvl() + ")";
+            if (character.getSpellBookID().equals(null))
+                sql = "INSERT INTO CHARACTER (RACE_ID, CLASS_ID, INVENTORY_ID, SPELL_BOOK_ID, ABILITY_SCORE_ID, CHAR_NAME, PLAYER_NAME, CHAR_LVL) OUTPUT inserted.ID VALUES (" + character.getRaceID() + ", " + character.getClassID() + ", '" + character.getInvetoryID() + "', " + character.getSpellBookID() + ", " + character.getAbilityScoreID() + ", '" + character.getCName() + "', '" + character.getPName() + "', " + character.getLvl() + ")";
+            else
+                sql = "INSERT INTO CHARACTER (RACE_ID, CLASS_ID, INVENTORY_ID, SPELL_BOOK_ID, ABILITY_SCORE_ID, CHAR_NAME, PLAYER_NAME, CHAR_LVL) OUTPUT inserted.ID VALUES (" + character.getRaceID() + ", " + character.getClassID() + ", '" + character.getInvetoryID() + "', '" + character.getSpellBookID() + "', " + character.getAbilityScoreID() + ", '" + character.getCName() + "', '" + character.getPName() + "', " + character.getLvl() + ")";
+
 
             rs = stmt.executeQuery(sql);
 
@@ -95,7 +99,7 @@ public class CharacterDAO {
 
         writer = new PrintWriter("character.txt");
         writer.print("Character name: " + character.getCName());
-        writer.println("Player name: " + character.getPName());
+        writer.println("\nPlayer name: " + character.getPName());
         writer.println("Class: " + character.getClass());
         writer.println("Race: " + character.getRace());
         writer.println("Attributes: " + character.getStr());
@@ -106,6 +110,7 @@ public class CharacterDAO {
         writer.println("\tCharisma: " + character.getCha());
 
         writer.println("Proficiencies: " + cDAO.getProf(character.getClassID()));
+        writer.println("\tArchetype: ");
         switch(character.getcClass().toLowerCase())
         {
             case "barbarian":
@@ -189,11 +194,13 @@ public class CharacterDAO {
         }
         writer.println("Feats: " + rDAO.getFeats(character.getRaceID()));
         writer.println("Inventory: ");
-        ArrayList items = character.getInvetoryID();
+        String item = character.getInvetoryID();
+        String[] items = item.split(",");
 
-        for (int x = 0; x < items.size(); x ++)
+
+        for (int x = 0; x < items.length; x++)
         {
-            writer.println("\t "+ itemDAO.getItemName((int)items.get(x)));
+            writer.println("\t " + itemDAO.getItemName(Integer.parseInt(items[x])));
         }
 
         writer.println("Spell List: ");
