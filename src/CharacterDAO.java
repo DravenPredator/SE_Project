@@ -7,6 +7,9 @@ import java.sql.*;
  */
 public class CharacterDAO {
 
+    private final String DB_URL = "jdbc:sqlserver://localhost:50396;" + "databaseName=DUNGEON_AND_DRAGONS;";
+    private final String USER = "sa";
+    private final String PASSWORD = "Yhlnjlk1";
     private AbilityScoreDAO acDAO = new AbilityScoreDAO();
     private ClassDAO cDAO = new ClassDAO();
     private RaceDAO rDAO = new RaceDAO();
@@ -14,17 +17,9 @@ public class CharacterDAO {
     private SpellBookDAO sbDAO = new SpellBookDAO();
     private ItemDAO itemDAO = new ItemDAO();
     private SpellDAO spellDAO = new SpellDAO();
-
     private PrintWriter writer = null;
     private Character character = null;
-
     private int id;
-    private String prof = "";
-
-    private final String DB_URL = "jdbc:sqlserver://localhost:50396;" + "databaseName=DUNGEON_AND_DRAGONS;";
-    private final String USER = "sa";
-    private final String PASSWORD = "Yhlnjlk1";
-
     private Connection conn = null;
     private Statement stmt = null;
     private String sql = null;
