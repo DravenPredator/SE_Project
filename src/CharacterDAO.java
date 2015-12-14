@@ -223,8 +223,7 @@ public class CharacterDAO {
                 writer.println("\t\t\t2: Sculpt Spells");
                 break;
         }
-        writer.println("Feats: \n\t" + rDAO.getFeats(character.getRaceID()));
-        writer.print(", COMMON");
+        writer.println("Feats: " + rDAO.getFeats(character.getRaceID()) + ", COMMON");
         writer.println("Inventory: ");
         String item = character.getInvetoryID();
         String[] items = item.split(",");
