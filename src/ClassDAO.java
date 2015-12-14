@@ -27,7 +27,7 @@ public class ClassDAO {
             conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 
             stmt = conn.createStatement();
-            sql = "SELECT ID FROM CLASS WHERE NAME = " + className;
+            sql = "SELECT ID FROM CLASS WHERE NAME = '" + className.toUpperCase() + "'";
 
             rs = stmt.executeQuery(sql);
 

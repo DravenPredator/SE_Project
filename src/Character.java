@@ -32,27 +32,27 @@ public class Character {
         this.pName = pName;
     }
 
-    public void setStr(Integer str) {
+    public void setStr(int str) {
         this.str = str;
     }
 
-    public void setCon(Integer con) {
+    public void setCon(int con) {
         this.con = con;
     }
 
-    public void setDex(Integer dex) {
+    public void setDex(int dex) {
         this.dex = dex;
     }
 
-    public void setWis(Integer wis) {
+    public void setWis(int wis) {
         this.wis = wis;
     }
 
-    public void setCha(Integer cha) {
+    public void setCha(int cha) {
         this.cha = cha;
     }
 
-    public void setInte(Integer inte) {
+    public void setInte(int inte) {
         this.inte = inte;
     }
 
@@ -144,14 +144,28 @@ public class Character {
         return raceID;
     }
 
-    public ArrayList getInvetoryID()
+    public String getInvetoryID()
     {
-        return inventoryID;
+        String iID = "";
+
+        for (int x = 0; x < inventoryID.size(); x++) {
+            iID += (inventoryID.get(x) + ",");
+        }
+        return iID;
     }
 
-    public ArrayList getSpellBookID()
+    public String getSpellBookID()
     {
-        return spellBookID;
+        String sbID = "";
+        if (spellBookID == null)
+            return null;
+        else {
+
+            for (int x = 0; x < spellBookID.size(); x++) {
+                sbID += (spellBookID.get(x) + ",");
+            }
+        }
+        return sbID;
     }
 
     public int getAbilityScoreID()

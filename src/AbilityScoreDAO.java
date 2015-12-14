@@ -34,30 +34,30 @@ public class AbilityScoreDAO {
                 switch(rs.getString("ABILITY_SCORE_1"))
                 {
                     case "CON":
-                        con += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_1"));
+                        con += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_1"));
                         break;
                     case "STR":
-                        str += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_1"));
+                        str += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_1"));
                         break;
                     case "DEX":
-                        dex += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_1"));
+                        dex += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_1"));
                         break;
                     case "INT":
-                        inte += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_1"));
+                        inte += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_1"));
                         break;
                     case "WIS":
-                        wis += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_1"));
+                        wis += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_1"));
                         break;
                     case "CHA":
-                        cha += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_1"));
+                        cha += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_1"));
                         break;
                     case "ALL":
-                        con += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_1"));
-                        str += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_1"));
-                        dex += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_1"));
-                        inte += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_1"));
-                        wis += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_1"));
-                        cha += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_1"));
+                        con += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_1"));
+                        str += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_1"));
+                        dex += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_1"));
+                        inte += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_1"));
+                        wis += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_1"));
+                        cha += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_1"));
                         break;
                     default:
                         break;
@@ -66,30 +66,30 @@ public class AbilityScoreDAO {
                 switch(rs.getString("ABILITY_SCORE_2"))
                 {
                     case "CON":
-                        con += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_2"));
+                        con += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_2"));
                         break;
                     case "STR":
-                        str += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_2"));
+                        str += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_2"));
                         break;
                     case "DEX":
-                        dex += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_2"));
+                        dex += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_2"));
                         break;
                     case "INT":
-                        inte += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_2"));
+                        inte += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_2"));
                         break;
                     case "WIS":
-                        wis += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_2"));
+                        wis += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_2"));
                         break;
                     case "CHA":
-                        cha += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_2"));
+                        cha += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_2"));
                         break;
                     case "ALL":
-                        con += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_2"));
-                        str += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_2"));
-                        dex += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_2"));
-                        inte += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_2"));
-                        wis += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_2"));
-                        cha += Integer.parseInt(rs.getString("ABLITY_=SCORE_INCREASE_2"));
+                        con += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_2"));
+                        str += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_2"));
+                        dex += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_2"));
+                        inte += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_2"));
+                        wis += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_2"));
+                        cha += Integer.parseInt(rs.getString("ABILITY_SCORE_INCREASE_2"));
                         break;
                     default:
                         break;

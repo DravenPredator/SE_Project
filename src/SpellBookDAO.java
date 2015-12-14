@@ -50,7 +50,7 @@ public class SpellBookDAO {
                 sql = "SELECT SPELL_ID FROM SPELL_BOOK WHERE ID > 66";
                 break;
             default:
-                sql = "SELECT * FROM SPELL_BOOK FETCH FIRST ROW ONLY";
+                sql = "SELECT TOP 1 SPELL_ID FROM SPELL_BOOK";
                 break;
         }
 

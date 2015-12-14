@@ -27,7 +27,7 @@ public class RaceDAO {
             conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 
             stmt = conn.createStatement();
-            sql = "SELECT ID FROM RACE WHERE NAME = " + raceName;
+            sql = "SELECT ID FROM RACE WHERE NAME = '" + raceName.toUpperCase() + "'";
 
             rs = stmt.executeQuery(sql);
 
