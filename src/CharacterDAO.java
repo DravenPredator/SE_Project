@@ -105,11 +105,44 @@ public class CharacterDAO {
         writer.println("Class: " + character.getClass());
         writer.println("Race: " + character.getRace());
         writer.println("Attributes: " + character.getStr());
-        writer.println("\tDexterity: " + character.getDex());
-        writer.println("\tConsitution: " + character.getCon());
-        writer.println("\tIntelligence: " + character.getInte());
-        writer.println("\tWisdom: " + character.getWis());
-        writer.println("\tCharisma: " + character.getCha());
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+
+            stmt = conn.createStatement();
+            sql = "SELECT * FROM ABILITY_SCORE WHERE ID =" + character.getAbilityScoreID();
+
+            rs = stmt.executeQuery(sql);
+
+
+            while (rs.next()) {
+                writer.println("\tStrength: " + rs.getInt("STRENGTH"));
+                writer.println("\tDexterity: " + rs.getInt("DEXTERITY"));
+                writer.println("\tConsitution: " + rs.getInt("CONSITUTION"));
+                writer.println("\tIntelligence: " + rs.getInt("INTELLIGENCE"));
+                writer.println("\tWisdom: " + rs.getInt("WISDOM"));
+                writer.println("\tCharisma: " + rs.getInt("CHARISMA"));
+            }
+
+
+            stmt.close();
+            conn.close();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                    System.out.println("CHARACTER HAS BEEN WRITTEN TO DATABASE!");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
         writer.println("Proficiencies: " + cDAO.getProf(character.getClassID()));
         writer.println("\tArchetype: ");
@@ -600,6 +633,7 @@ public class CharacterDAO {
         }
 
         writer.close();
+        System.out.println("CHARACTER HAS BEEN EXPORTED!");
     }
 
     public void exportToFile(String id) throws IOException {
