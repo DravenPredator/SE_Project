@@ -618,7 +618,6 @@ public class CharacterDAO {
                 pCharacter.setClassID(rs.getInt("CLASS_ID"));
                 pCharacter.setRaceID(rs.getInt("RACE_ID"));
                 pCharacter.setLvl(rs.getString("CHAR_LVL"));
-                System.out.println(rs.getString("INVENTORY_ID"));
                 pCharacter.setInventoryID(rs.getString("INVENTORY_ID"), null);
                 pCharacter.setSpellBookID(rs.getString("SPELL_BOOK_ID"), null);
                 pCharacter.setAbilityScoreID(rs.getInt("ABILITY_SCORE_ID"));
