@@ -703,6 +703,7 @@ public class CharacterDAO {
             }
         }
         this.character = pCharacter;
+
         try {
             exportToFile();
         } catch (IOException e) {
