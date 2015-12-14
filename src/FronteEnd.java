@@ -1,16 +1,9 @@
-import java.awt.EventQueue;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class FronteEnd {
@@ -33,12 +26,12 @@ public class FronteEnd {
 
     private Character character = new Character();
 
-    private int charStr = 10;
-    private int charDex = 10;
-    private int charCon = 10;
-    private int charInt = 10;
-    private int charWis = 10;
-    private int charCha = 10;
+    /**
+     * Create the application.
+     */
+    public FronteEnd() {
+        initialize();
+    }
 
     /**
      * Launch the application.
@@ -54,13 +47,6 @@ public class FronteEnd {
                 }
             }
         });
-    }
-
-    /**
-     * Create the application.
-     */
-    public FronteEnd() {
-        initialize();
     }
 
     /**

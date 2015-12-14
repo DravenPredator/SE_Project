@@ -84,8 +84,10 @@ public class CharacterDAO {
             e.printStackTrace();
         } finally {
             try {
-                if (stmt != null)
+                if (stmt != null) {
                     stmt.close();
+                    System.out.println("CHARACTER HAS BEEN WRITTEN TO DATABASE!");
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -97,7 +99,7 @@ public class CharacterDAO {
         writer = new PrintWriter("character.txt");
         writer.print("Character name: " + character.getCName());
         writer.println("\nPlayer name: " + character.getPName());
-        writer.println("Class: " + character.getClass());
+        writer.println("Class: " + character.getcClass());
         writer.println("Race: " + character.getRace());
         writer.println("Attributes: " + character.getStr());
         try {
@@ -132,7 +134,6 @@ public class CharacterDAO {
             try {
                 if (stmt != null) {
                     stmt.close();
-                    System.out.println("CHARACTER HAS BEEN WRITTEN TO DATABASE!");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -222,7 +223,8 @@ public class CharacterDAO {
                 writer.println("\t\t\t2: Sculpt Spells");
                 break;
         }
-        writer.println("Feats: " + rDAO.getFeats(character.getRaceID()));
+        writer.println("Feats: \n\t" + rDAO.getFeats(character.getRaceID()));
+        writer.print(", COMMON");
         writer.println("Inventory: ");
         String item = character.getInvetoryID();
         String[] items = item.split(",");
