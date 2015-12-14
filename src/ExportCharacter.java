@@ -17,6 +17,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 public class ExportCharacter extends JDialog {
 
@@ -61,6 +62,20 @@ public class ExportCharacter extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						String id = txtCharacterID.getText();
+						CharacterDAO characterDAO = new CharacterDAO();
+						try {
+							characterDAO.exportToFile(id);
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					}
+
+
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);

@@ -64,7 +64,7 @@ public class RaceDAO {
             conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 
             stmt = conn.createStatement();
-            sql = "SELECT FEATS FROM FEAT WHERE ID = "+id;
+            sql = "SELECT FEATS FROM RACE WHERE ID = " + id;
             rs = stmt.executeQuery(sql);
 
 

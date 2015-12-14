@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -68,12 +69,41 @@ public class Character {
         this.lvl = lvl;
     }
 
-    public void setInventoryID(ArrayList inventoryID) {
-        this.inventoryID = inventoryID;
+    public void setInventoryID(String inventoryID, ArrayList inventoryID_2) {
+        if (inventoryID == null && inventoryID_2 == null)
+            this.inventoryID = null;
+        else {
+            if (inventoryID_2 != null) {
+                this.inventoryID = inventoryID_2;
+            } else {
+                String[] inventory = inventoryID.split(",");
+                ArrayList inventoryID_3 = new ArrayList(2);
+
+                for (int x = 0; x < inventory.length; x++) {
+                    inventoryID_3.add(inventory[x]);
+                }
+
+                this.inventoryID = inventoryID_3;
+            }
+        }
+
     }
 
-    public void setSpellBookID(ArrayList spellBookID) {
-        this.spellBookID = spellBookID;
+    public void setSpellBookID(String spellBookID, ArrayList spellBookID_2) {
+        if (spellBookID == null && spellBookID_2 == null)
+            this.spellBookID = null;
+        else if (spellBookID_2 != null)
+            this.spellBookID = spellBookID_2;
+        else {
+            String[] spellBook = spellBookID.split(",");
+            ArrayList spellBook_2 = new ArrayList(2);
+
+            for (int x = 0; x < spellBook.length; x++) {
+                spellBook_2.add(spellBook[x]);
+            }
+
+            this.spellBookID = spellBook_2;
+        }
     }
 
     public void setAbilityScoreID(Integer abilityScoreID) {
@@ -148,8 +178,12 @@ public class Character {
     {
         String iID = "";
 
-        for (int x = 0; x < inventoryID.size(); x++) {
-            iID += (inventoryID.get(x) + ",");
+        if (inventoryID == null)
+            return null;
+        else {
+            for (int x = 0; x < inventoryID.size(); x++) {
+                iID += (inventoryID.get(x) + ",");
+            }
         }
         return iID;
     }

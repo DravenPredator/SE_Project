@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.DefaultComboBoxModel;
@@ -7,11 +6,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -128,7 +124,9 @@ public class FronteEnd {
 
                 CharacterDAO cDAO = new CharacterDAO(character);
 
+
                 cDAO.writeCharacterToDatabase();
+                System.out.println("Character ID: " + cDAO.getID());
                 try {
                     cDAO.exportToFile();
                 } catch (IOException e) {

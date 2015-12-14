@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
-import java.util.ArrayList;
 
 /**
  * Created by Draven on 12/11/2015.
@@ -36,8 +35,15 @@ public class CharacterDAO {
         this.character = character;
     }
 
+    public CharacterDAO() {
+    }
+
     public void writeCharacterToDatabase()
     {
+
+        iDAO.setInventory(character.getcClass());
+        character.setInventoryID(null, iDAO.getID());
+
         rDAO.setID(character.getRace());
         character.setRaceID(rDAO.getID());
 
@@ -46,12 +52,10 @@ public class CharacterDAO {
 
         sbDAO.setSpellBook(character.getcClass());
         if (sbDAO.getID().size() < 3)
-            character.setSpellBookID(null);
+            character.setSpellBookID(null, null);
         else
-            character.setSpellBookID(sbDAO.getID());
+            character.setSpellBookID(null, sbDAO.getID());
 
-        iDAO.setInventory(character.getcClass());
-        character.setInventoryID(iDAO.getID());
 
         cDAO.setID(character.getcClass());
         character.setClassID(cDAO.getID());
@@ -62,7 +66,7 @@ public class CharacterDAO {
             conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 
             stmt = conn.createStatement();
-            if (character.getSpellBookID().equals(null))
+            if (character.getSpellBookID() == null)
                 sql = "INSERT INTO CHARACTER (RACE_ID, CLASS_ID, INVENTORY_ID, SPELL_BOOK_ID, ABILITY_SCORE_ID, CHAR_NAME, PLAYER_NAME, CHAR_LVL) OUTPUT inserted.ID VALUES (" + character.getRaceID() + ", " + character.getClassID() + ", '" + character.getInvetoryID() + "', " + character.getSpellBookID() + ", " + character.getAbilityScoreID() + ", '" + character.getCName() + "', '" + character.getPName() + "', " + character.getLvl() + ")";
             else
                 sql = "INSERT INTO CHARACTER (RACE_ID, CLASS_ID, INVENTORY_ID, SPELL_BOOK_ID, ABILITY_SCORE_ID, CHAR_NAME, PLAYER_NAME, CHAR_LVL) OUTPUT inserted.ID VALUES (" + character.getRaceID() + ", " + character.getClassID() + ", '" + character.getInvetoryID() + "', '" + character.getSpellBookID() + "', " + character.getAbilityScoreID() + ", '" + character.getCName() + "', '" + character.getPName() + "', " + character.getLvl() + ")";
@@ -95,8 +99,6 @@ public class CharacterDAO {
     }
 
     public void exportToFile() throws IOException {
-
-
         writer = new PrintWriter("character.txt");
         writer.print("Character name: " + character.getCName());
         writer.println("\nPlayer name: " + character.getPName());
@@ -600,7 +602,83 @@ public class CharacterDAO {
         writer.close();
     }
 
-    public void exportToFile(String id){ };
+    public void exportToFile(String id) throws IOException {
+        String query = "SELECT * FROM character WHERE ID =" + id;
+        Character pCharacter = null;
+
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                //Needs the table names for the rs statements
+                pCharacter = new Character();
+                pCharacter.setcName(rs.getString("CHAR_NAME"));
+                pCharacter.setpName(rs.getString("PLAYER_NAME"));
+                pCharacter.setClassID(rs.getInt("CLASS_ID"));
+                pCharacter.setRaceID(rs.getInt("RACE_ID"));
+                pCharacter.setLvl(rs.getString("CHAR_LVL"));
+                System.out.println(rs.getString("INVENTORY_ID"));
+                pCharacter.setInventoryID(rs.getString("INVENTORY_ID"), null);
+                pCharacter.setSpellBookID(rs.getString("SPELL_BOOK_ID"), null);
+                pCharacter.setAbilityScoreID(rs.getInt("ABILITY_SCORE_ID"));
+
+            }
+            stmt.close();
+
+            stmt = conn.createStatement();
+            query = "SELECT * FROM ABILITY_SCORE WHERE ID = " + pCharacter.getAbilityScoreID();
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                pCharacter.setStr(rs.getInt("STRENGTH"));
+                pCharacter.setCon(rs.getInt("CONSITUTION"));
+                pCharacter.setDex(rs.getInt("DEXTERITY"));
+                pCharacter.setWis(rs.getInt("WISDOM"));
+                pCharacter.setCha(rs.getInt("CHARISMA"));
+                pCharacter.setInte(rs.getInt("INTELLIGENCE"));
+            }
+
+            stmt.close();
+
+            stmt = conn.createStatement();
+            query = "SELECT NAME FROM RACE WHERE ID = " + pCharacter.getRaceID();
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                pCharacter.setRace(rs.getString("NAME"));
+            }
+
+            stmt.close();
+
+            stmt = conn.createStatement();
+            query = "SELECT NAME FROM CLASS WHERE ID = " + pCharacter.getClassID();
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                pCharacter.setcClass(rs.getString("NAME"));
+            }
+
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null)
+                    stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        this.character = pCharacter;
+        try {
+            exportToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public int getID()
     {
         return id;
